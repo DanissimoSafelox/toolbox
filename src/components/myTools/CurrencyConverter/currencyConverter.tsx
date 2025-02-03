@@ -1,5 +1,5 @@
 import classes from './currencyConverter.module.css'
-import {type Dispatch, type FC, type SetStateAction, useEffect, useState} from 'react'
+import {type Dispatch, type FC, type SetStateAction, useEffect, useRef, useState} from 'react'
 
 interface blockProps {
 	value: string
@@ -8,51 +8,12 @@ interface blockProps {
 	onChangeCurrency: Dispatch<SetStateAction<Currency>>
 }
 
-type Currency =
-	| "AUD"
-	| "AZN"
-	| "GBP"
-	| "AMD"
-	| "BYN"
-	| "BGN"
-	| "BRL"
-	| "HUF"
-	| "VND"
-	| "HKD"
-	| "GEL"
-	| "DKK"
-	| "AED"
-	| "USD"
-	| "EUR"
-	| "EGP"
-	| "INR"
-	| "IDR"
-	| "KZT"
-	| "CAD"
-	| "QAR"
-	| "KGS"
-	| "CNY"
-	| "MDL"
-	| "NZD"
-	| "NOK"
-	| "PLN"
-	| "RON"
-	| "XDR"
-	| "SGD"
-	| "TJS"
-	| "THB"
-	| "TRY"
-	| "TMT"
-	| "UZS"
-	| "UAH"
-	| "CZK"
-	| "SEK"
-	| "CHF"
-	| "RSD"
-	| "ZAR"
-	| "KRW"
-	| "JPY"
-	| "RUB"
+type Currency = string
+
+// type Currency =
+// 	| "AUD"
+// ...
+
 
 interface Icurrency {
 	CharCode: Currency
@@ -70,7 +31,7 @@ const rate: Record<Currency, Icurrency> =  {
 	RUB: {
 		CharCode: 'RUB',
 		ID: 'VVP',
-		Name: 'Рубль',
+		Name: 'Российский Рубль',
 		Nominal: 1,
 		NumCode: 'VVP',
 		Previous: 1,
@@ -116,16 +77,17 @@ export const CurrencyConverter = () => {
 	const [fromCurrency, setFromCurrency] = useState<Currency>(defaultCurrencies[0])
 	const [toCurrency, setToCurrency] = useState<Currency>(defaultCurrencies[1])
 	const [fromPrice, setFromPrice] = useState('')
-	const [toPrice, setToPrice] = useState('')
+	const [toPrice, setToPrice] = useState('1')
 
-	const [rates, setRates] = useState<Record<Currency, Icurrency> | null>()
+	const ratesRef = useRef<Record<Currency, Icurrency>>()
 
 
 	useEffect(() => {
 		fetch('https://www.cbr-xml-daily.ru/daily_json.js')
 			.then((res) => res.json())
 			.then((json) => {
-				setRates({...json.Valute, ...rate})
+				ratesRef.current = {...json.Valute, ...rate}
+				onChangeToPrice(toPrice)
 				console.log(json.Valute)
 			}).catch(err => {
 				console.warn(err)
@@ -135,31 +97,30 @@ export const CurrencyConverter = () => {
 
 
 	const onChangeToPrice = (value: string) => {
-		if (!rates) return
+		if (!ratesRef.current) return
 		if (!value) {
 			setToPrice(value)
 			setFromPrice(value)
 			return
 		}
-		const res = (Number(value) * rates[toCurrency].Value / rates[fromCurrency].Value)
+
+		const res = (Number(value) * ratesRef.current[toCurrency].Value / ratesRef.current[fromCurrency].Value)
 		setFromPrice(res >= 1 ? res.toFixed(3) : 0 < res && res < 0.00001 ? res.toExponential(3) : res.toFixed(6))
 		setToPrice(value.replace(/^0\d/, value.replace(/^0/, '')))
 	}
 
 	const onChangeFromPrice = (value: string) => {
-		if (!rates) return
+		if (!ratesRef.current) return
 		if (!value) {
 			setToPrice(value)
 			setFromPrice(value)
 			return
 		}
 		if(value.slice(0, value.indexOf('.')).length > 1 && value[0] === '0') return
-		console.log('До запятой', value.slice(0, value.indexOf('.')))
 
-		const res = (Number(value) * rates[fromCurrency].Value / rates[toCurrency].Value)
+		const res = (Number(value) * ratesRef.current[fromCurrency].Value / ratesRef.current[toCurrency].Value)
 		setToPrice(res >= 1 ? res.toFixed(3) : 0 < res && res < 0.00001 ? res.toExponential(3) : res.toFixed(6))
 		setFromPrice(value.replace(/^0\d/, value.replace(/^0/, '')))
-		console.log(value.replace(/^0\d/, value.replace(/^0/, '')))
 	}
 
 
@@ -170,7 +131,6 @@ export const CurrencyConverter = () => {
 	useEffect(() => {
 		setToPrice(prevState => onChangeToPrice(prevState))
 	}, [toCurrency])
-
 
 
 	return (
@@ -190,22 +150,3 @@ export const CurrencyConverter = () => {
 		</div>
 	)
 }
-
-
-// const onChangeToPrice = useCallback((value: string) => {
-// 	if (!rates) return
-// 	const numValue = value === '' ? 0 : Number(value)
-// 	const price = toCurrency === 'RUB' ? numValue : numValue * rates[toCurrency].Value
-// 	const result = fromCurrency === 'RUB' ? price : price / rates[fromCurrency].Value
-// 	setFromPrice(result.toString())
-// 	setSkipPrice(value)
-// }, [fromCurrency, rates, toCurrency])
-//
-// const onChangeFromPrice = useCallback((value: string) => {
-// 	if (!rates) return
-// 	const numValue = value === '' ? 0 : Number(value)
-// 	const price = fromCurrency === 'RUB' ? numValue : numValue * rates[fromCurrency].Value
-// 	const result = toCurrency === 'RUB' ? price : price / rates[toCurrency].Value
-// 	setToPrice(result.toString())
-// 	setSkipPrice(value)
-// }, [fromCurrency, rates, toCurrency])

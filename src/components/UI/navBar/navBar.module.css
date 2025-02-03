@@ -1,0 +1,18 @@
+.navBar {
+	width: 100%;
+}
+
+.panel {
+	padding: 20px;
+	justify-self: center;
+}
+
+.list {
+	display: flex;
+	column-gap: 10px;
+}
+
+.item {
+	border: chocolate solid 2px;
+	padding: 5px;
+}

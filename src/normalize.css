@@ -141,6 +141,8 @@ body {
   */
 a:where([class]) {
 	display: inline-flex;
+	color: inherit;
+	text-decoration: none;
 }
 
 /**

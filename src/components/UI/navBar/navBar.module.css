@@ -13,6 +13,10 @@
 }
 
 .item {
-	border: chocolate solid 2px;
 	padding: 5px;
+	a {
+		font-size: 30px;
+		font-weight: 600;
+	}
 }
+

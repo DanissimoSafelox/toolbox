@@ -7,6 +7,7 @@ interface NavBarProps {
 
 
 export const NavBar: FC<NavBarProps> = ({children}) => {
+
 	return (
 		<div className={classes.navBar}>
 			<nav className={classes.panel}>

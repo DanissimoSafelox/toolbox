@@ -11,8 +11,9 @@ interface blockProps {
 type Currency = string
 
 // type Currency =
-// 	| "AUD"
-// ...
+// 	  "AUD"
+//	   | "USD"
+// ... А если Германия выйдет из ЕС
 
 
 interface Icurrency {

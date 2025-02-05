@@ -75,6 +75,7 @@ const Block: FC<blockProps> = ({ value, currency, onChangeValue, onChangeCurrenc
 
 
 export const CurrencyConverter = () => {
+
 	const [fromCurrency, setFromCurrency] = useState<Currency>(defaultCurrencies[0])
 	const [toCurrency, setToCurrency] = useState<Currency>(defaultCurrencies[1])
 	const [fromPrice, setFromPrice] = useState('')
@@ -84,16 +85,38 @@ export const CurrencyConverter = () => {
 
 
 	useEffect(() => {
-		fetch('https://www.cbr-xml-daily.ru/daily_json.js')
-			.then((res) => res.json())
-			.then((json) => {
-				ratesRef.current = {...json.Valute, ...rate}
-				onChangeToPrice(toPrice)
-				console.log(json.Valute)
-			}).catch(err => {
+		const fetchData = () => {
+			const now = new Date();
+			const currentHour = now.getHours()
+			const storedData = localStorage.getItem('apiData_cbr');
+			if (storedData) {
+				const {data: cachedData, timestamp} = JSON.parse(storedData);
+				const cachedHour = new Date(timestamp).getHours();
+				if (cachedHour === currentHour) {
+					ratesRef.current = cachedData;
+					onChangeToPrice(toPrice)
+					return;
+				}
+			}
+			fetch('https://www.cbr-xml-daily.ru/daily_json.js')
+				.then((res) => res.json())
+				.then((json) => {
+					localStorage.setItem(
+						'apiData_cbr',
+						JSON.stringify({
+							data: {...json.Valute, ...rate},
+							timestamp: now.toISOString(),
+						})
+					)
+					ratesRef.current = {...json.Valute, ...rate}
+					onChangeToPrice(toPrice)
+					console.log(`Получены данные с ЦБ РФ, актуальные на ${now.getDate()}.${now.getMonth()+1}.${now.getFullYear()} ${currentHour}:00`)
+				}).catch(err => {
 				console.warn(err)
 				alert('Не удалось получить данные')
-		})
+			})
+		}
+		fetchData()
 	}, [])
 
 

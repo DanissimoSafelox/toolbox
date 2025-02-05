@@ -1,5 +1,5 @@
 import './App.css'
-import {Link, Route, useLocation} from 'wouter'
+import {Route, useLocation} from 'wouter'
 import {NavBar} from './components/UI/navBar/navBar.tsx'
 import {Layout} from './components/UI/layout/layout.tsx'
 import {CurrencyConverter} from './components/myTools/CurrencyConverter/currencyConverter.tsx'

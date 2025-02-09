@@ -1,5 +1,5 @@
 import {type ReactNode} from 'react'
-import classes from './layout.module.css'
+import classes from './_layout.module.scss'
 
 interface NavBarProps {
 	children: ReactNode

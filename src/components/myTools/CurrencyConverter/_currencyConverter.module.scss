@@ -1,0 +1,74 @@
+@use '@helpers' as *;
+
+.currencyConverter {
+  display: flex;
+  height: fit-content;
+  margin-top: fluid(200, 10);
+  padding: fluid(40, 15);
+  gap: fluid(40, 20);
+  background-color: var(--color-primary-solar-900);
+  box-shadow: 0px 0px 8px 4px var(--color-shadow-1);
+  border-radius: fluid(60, 20);
+
+  @include tablet {
+    flex-direction: column;
+  }
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  max-width: min-content;
+  padding: fluid(20, 10);
+  row-gap: fluid(30, 10);
+}
+
+.currenciesList {
+  display: flex;
+  font-size: fluid(24, 14);
+  font-weight: 500;
+  color: var(--color-dark-00);
+  border-radius: var(--border-radius-def);
+  background-color: var(--color-primary-solar-800);
+  box-shadow: 0px 0px 4px 2px var(--color-shadow-0);
+
+  > * {
+    display: flex;
+    align-items: center;
+    padding-inline: fluid(20, 10);
+    padding-block: fluid(5, 1);
+
+    cursor: pointer;
+
+    &:hover:not(.active) {
+      background-color: var(--color-primary-Aubergine-800);
+    }
+
+  }
+}
+
+.input {
+  width: 100%;
+  padding-inline: fluid(20, 5);
+  font-size: fluid(40, 24);
+  font-weight: 700;
+  color: #1a1a1a;
+  background-color: var(--color-primary-coffee-900);
+  border: none;
+  border-radius: var(--border-radius-def);
+  box-shadow: 0px 0px 8px 4px var(--color-shadow-0);
+
+  user-select: all;
+  -webkit-user-select: all;
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+  }
+}
+
+.active {
+  background-color: var(--color-primary-Aubergine-200);
+  color: var(--color-primary-coffee-900);
+  border-radius: var(--border-radius-def);
+}

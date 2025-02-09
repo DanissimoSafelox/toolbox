@@ -1,4 +1,4 @@
-import './App.css'
+import './styles/main.css'
 import {Route, useLocation} from 'wouter'
 import {NavBar} from './components/UI/navBar/navBar.tsx'
 import {Layout} from './components/UI/layout/layout.tsx'
@@ -8,7 +8,7 @@ function App() {
 	const [location, setLocation] = useLocation()
 	return (
 		<div className={'App'}>
-			<header>
+			<header className={'header'}>
 				<NavBar>
 					<a
 						className={`link ${location === '/' ? 'current' : ''}`}

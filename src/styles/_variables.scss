@@ -1,0 +1,72 @@
+@use 'helpers' as *;
+
+:root {
+  --color-darkness: #000;
+  --color-dark-00: #1a1a1a;
+  --color-dark-10: #242424;
+  --color-white: #FFFFFFDD;
+
+  --color-primary-Aubergine-000: #3b2091;
+  --color-primary-Aubergine-100: #4527a4;
+  --color-primary-Aubergine-200: #4f2db6;
+  --color-primary-Aubergine-300: #5f3ace;
+  --color-primary-Aubergine-400: #6946d0;
+  --color-primary-Aubergine-500: #7c5ed5;
+  --color-primary-Aubergine-600: #9a83e0;
+  --color-primary-Aubergine-700: #beafeb;
+  --color-primary-Aubergine-800: #e0d9f8;
+  --color-primary-Aubergine-900: #f3eeff;
+
+  --color-primary-lavanda-000: #7100ad;
+  --color-primary-lavanda-100: #820ac6;
+  --color-primary-lavanda-200: #9211de;
+  --color-primary-lavanda-300: #a71bf9;
+  --color-primary-lavanda-400: #ac25f8;
+  --color-primary-lavanda-500: #b63df8;
+  --color-primary-lavanda-600: #c668f9;
+  --color-primary-lavanda-700: #da9ef9;
+  --color-primary-lavanda-800: #ecd1fb;
+  --color-primary-lavanda-900: #f8ebff;
+
+  --color-primary-solar-000: #ae7300;
+  --color-primary-solar-100: #c98600;
+  --color-primary-solar-200: #e19700;
+  --color-primary-solar-300: #fdad05;
+  --color-primary-solar-400: #fdb21a;
+  --color-primary-solar-500: #fdbc37;
+  --color-primary-solar-600: #fecc64;
+  --color-primary-solar-700: #ffde9a;
+  --color-primary-solar-800: #ffefca;
+  --color-primary-solar-900: #fff8e0;
+
+  --color-primary-coffee-000: #575757;
+  --color-primary-coffee-100: #656565;
+  --color-primary-coffee-200: #717171;
+  --color-primary-coffee-300: #848484;
+  --color-primary-coffee-400: #8b8b8b;
+  --color-primary-coffee-500: #9a9a9a;
+  --color-primary-coffee-600: #b2b2b2;
+  --color-primary-coffee-700: #cdcdcd;
+  --color-primary-coffee-800: #e7e7e7;
+  --color-primary-coffee-900: #f5f5f5;
+
+  --color-primary-dark-000: #664b4b;
+  --color-primary-dark-100: #715959;
+  --color-primary-dark-200: #7d6565;
+  --color-primary-dark-300: #8f7676;
+  --color-primary-dark-400: #947f7f;
+  --color-primary-dark-500: #a19090;
+  --color-primary-dark-600: #b7aaaa;
+  --color-primary-dark-700: #d0c8c8;
+  --color-primary-dark-800: #eae4e4;
+  --color-primary-dark-900: #fcf2f2;
+
+
+  --color-shadow-0: rgba(1, 52, 93, 0.2);
+  --color-shadow-1: rgba(255, 201, 130, 0.3);
+
+
+  --border-radius-sm: 2px;
+  --border-radius-def: 4px;
+  --border-radius-md: 8px;
+}

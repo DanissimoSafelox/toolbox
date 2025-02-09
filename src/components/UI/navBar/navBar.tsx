@@ -1,5 +1,5 @@
 import {Children, type FC, type ReactNode} from 'react'
-import classes from './navBar.module.css'
+import classes from './_navBar.module.scss'
 
 interface NavBarProps {
 	children: ReactNode

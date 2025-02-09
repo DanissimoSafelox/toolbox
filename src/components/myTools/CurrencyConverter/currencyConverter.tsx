@@ -1,4 +1,4 @@
-import classes from './currencyConverter.module.css'
+import classes from './_currencyConverter.module.scss'
 import {type Dispatch, type FC, type SetStateAction, useEffect, useRef, useState} from 'react'
 
 interface blockProps {
@@ -51,7 +51,9 @@ const Block: FC<blockProps> = ({ value, currency, onChangeValue, onChangeCurrenc
 						className={currency === cur ? classes.active : ''}
 						key={cur}
 					>
-						{cur}
+						<p>
+							{cur}
+						</p>
 					</li>
 				))}
 				<li>
@@ -101,6 +103,9 @@ export const CurrencyConverter = () => {
 			fetch('https://www.cbr-xml-daily.ru/daily_json.js')
 				.then((res) => res.json())
 				.then((json) => {
+					//TODO Слишком большой объект, нужно оставить только необходимые поля
+					//TODO важные поля - Name, Value, Nominal
+					//TODO Учитывать Nominal - нужно разделить на него Value, и тогда будет реальный курс
 					localStorage.setItem(
 						'apiData_cbr',
 						JSON.stringify({

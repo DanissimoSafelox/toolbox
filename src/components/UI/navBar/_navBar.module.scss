@@ -1,0 +1,23 @@
+@use '@helpers' as *;
+
+.navBar {
+  width: 100%;
+}
+
+.panel {
+  padding: rem(20);
+  justify-self: center;
+}
+
+.list {
+  display: flex;
+  column-gap: rem(10);
+}
+
+.item {
+  padding: rem(5);
+  a {
+    font-size: fluid(36, 18);
+    font-weight: 600;
+  }
+}

@@ -32,3 +32,12 @@
     }
   }
 }
+
+.button {
+  border-radius: rem(10);
+  width: fit-content;
+  height: fit-content;
+  padding-inline: rem(5);
+  padding-block: rem(2);
+  color: var(--color-white);
+}
